@@ -1,4 +1,4 @@
-export type TShipment = {
+export type TShipmentState = {
     shipmentId: number,
     toAddress: string,
     fromAddress: string,
@@ -9,11 +9,11 @@ export type TShipment = {
 }
 
 export interface IMockGui {
-    state: TShipment
+    state: TShipmentState
 }
 
 export default class MockGui implements IMockGui{
-    private _state: TShipment = {
+    private _state: TShipmentState = {
         shipmentId: 1,
         toAddress: 'Atlanta',
         fromAddress: 'London',
@@ -23,7 +23,7 @@ export default class MockGui implements IMockGui{
         marks: []
     }
 
-    get state() {
+    get state(): TShipmentState {
         return this._state
     }
 }
