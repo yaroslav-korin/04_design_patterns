@@ -7,12 +7,12 @@ export class Client {
 
     constructor(Gui: MockGui) {
         const guiState: TShipmentState = Gui.state;
-        this.shipment = new ShipmentDecorator(new Shipment(guiState))
-        this.onShip()
-    }
+        this.shipment = new ShipmentDecorator(new Shipment(guiState));
+        this.onShip();
+    };
 
     private onShip(): string {
-        return this.shipment.ship()
-    }
-}
+        return this.shipment.ship();
+    };
+};
 

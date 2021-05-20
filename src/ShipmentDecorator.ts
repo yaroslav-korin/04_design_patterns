@@ -5,15 +5,15 @@ export default class ShipmentDecorator implements IShipment{
 
     constructor(shipment: Shipment) {
         this.wrappee = shipment;
-    }
+    };
 
     ship(): string {
-        const {marks} = this.wrappee.state
+        const {marks} = this.wrappee.state;
 
-        return `${this.wrappee.ship()} ${marks.map(mark => `\n**${mark.toUpperCase()}**`)}`
-    }
+        return `${this.wrappee.ship()} ${marks.map(mark => `\n**${mark.toUpperCase()}**`)}`;
+    };
 
     getShipmentId(): number {
-        return this.wrappee.getShipmentId()
-    }
+        return this.wrappee.getShipmentId();
+    };
 }

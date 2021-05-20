@@ -3,7 +3,7 @@ import {ShipmentTypes, TShipment} from "./Shipment";
 
 export interface IShipper {
     getCost(shipment: TShipmentState, shipmentType: TShipment): number;
-}
+};
 
 
 export default class Shipper implements IShipper {
@@ -33,17 +33,17 @@ export default class Shipper implements IShipper {
                 break;
             default:
                 shipper = new AirEastShipper(weight, shipmentType)
-        }
+        };
 
-        return shipper.calcPrice()
-    }
-}
+        return shipper.calcPrice();
+    };
+};
 
 type TPriceTypes = {
     [ShipmentTypes.LETTER]: number,
     [ShipmentTypes.PACKAGE]: number,
     [ShipmentTypes.Oversized]: number,
-}
+};
 
 abstract class BaseShipper {
     protected shipmentWeight: number;
@@ -55,14 +55,14 @@ abstract class BaseShipper {
     }
 
     abstract calcPrice(): number;
-}
+};
 
 class AirEastShipper extends BaseShipper {
     private readonly _pricePerOunce: TPriceTypes = {
         [ShipmentTypes.LETTER]: 0.39,
         [ShipmentTypes.PACKAGE]: 0.25,
         [ShipmentTypes.Oversized]: 10,
-    }
+    };
 
     calcPrice(): number {
         switch (this.shipmentType) {
@@ -72,16 +72,16 @@ class AirEastShipper extends BaseShipper {
                 return this.shipmentWeight * this._pricePerOunce[ShipmentTypes.PACKAGE];
             case ShipmentTypes.Oversized:
                 return this._pricePerOunce[ShipmentTypes.Oversized] + this.shipmentWeight * this._pricePerOunce[ShipmentTypes.PACKAGE];
-        }
-    }
-}
+        };
+    };
+};
 
 class ChicagoSprintShipper extends BaseShipper {
     private readonly _pricePerOunce: TPriceTypes = {
         [ShipmentTypes.LETTER]: 0.42,
         [ShipmentTypes.PACKAGE]: 0.20,
         [ShipmentTypes.Oversized]: 0,
-    }
+    };
 
     calcPrice(): number {
         switch (this.shipmentType) {
@@ -90,17 +90,17 @@ class ChicagoSprintShipper extends BaseShipper {
             case ShipmentTypes.PACKAGE:
                 return this.shipmentWeight * this._pricePerOunce[ShipmentTypes.PACKAGE];
             case ShipmentTypes.Oversized:
-                return this._pricePerOunce[ShipmentTypes.Oversized]
-        }
-    }
-}
+                return this._pricePerOunce[ShipmentTypes.Oversized];
+        };
+    };
+};
 
 class PacificParcelShipper extends BaseShipper {
     private readonly _pricePerOunce: TPriceTypes = {
         [ShipmentTypes.LETTER]: 0.51,
         [ShipmentTypes.PACKAGE]: 0.19,
         [ShipmentTypes.Oversized]: 0.02
-    }
+    };
 
     calcPrice(): number {
         switch (this.shipmentType) {
@@ -110,6 +110,6 @@ class PacificParcelShipper extends BaseShipper {
                 return this.shipmentWeight * this._pricePerOunce[ShipmentTypes.PACKAGE];
             case ShipmentTypes.Oversized:
                 return this.shipmentWeight * (this._pricePerOunce[ShipmentTypes.PACKAGE] + this._pricePerOunce[ShipmentTypes.Oversized]);
-        }
-    }
-}
+        };
+    };
+};
