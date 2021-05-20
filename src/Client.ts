@@ -1,12 +1,13 @@
 import MockGui, {TShipmentState} from "./MockGui";
-import {Shipment} from "./Shipment";
+import {IShipment, Shipment} from "./Shipment";
+import ShipmentDecorator from "./ShipmentDecorator";
 
 export class Client {
-    private shipment: Shipment;
+    private shipment: IShipment;
 
     constructor(Gui: MockGui) {
         const guiState: TShipmentState = Gui.state;
-        this.shipment = new Shipment(guiState)
+        this.shipment = new ShipmentDecorator(new Shipment(guiState))
         this.onShip()
     }
 
